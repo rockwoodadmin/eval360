@@ -8,6 +8,8 @@ WebMock.disable_net_connect!(:allow => "codeclimate.com")
 
 require 'factory_girl'
 require 'database_cleaner'
+require 'capybara/rspec'
+require 'capybara/email/rspec'
 
 RSpec.configure do |config|
 

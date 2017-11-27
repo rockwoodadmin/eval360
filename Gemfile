@@ -45,6 +45,9 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara'
+  gem 'capybara-email'
+  gem 'launchy'
   gem 'shoulda-matchers', require: false
   gem 'shoulda-callback-matchers', '~> 1.0'
   gem 'rake'
