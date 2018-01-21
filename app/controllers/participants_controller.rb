@@ -49,18 +49,6 @@ class ParticipantsController < ApplicationController
   end
 
 
-  def evaluation_report
-    if @participant.nil?
-      redirect_to :back, notice: "Unable to find that participant" and return
-    end
-    respond_to do |format|
-      format.pdf do
-        pdf = ReportPdf.new(@participant)
-        send_data pdf.render, filename: "#{@participant.full_name}.pdf", type: 'application/pdf'
-      end
-    end
-  end
-
   private
 
   def find_participant

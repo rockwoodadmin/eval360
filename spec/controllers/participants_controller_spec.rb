@@ -80,13 +80,4 @@ RSpec.describe ParticipantsController, :type => :controller do
     end
   end
 
-  describe "GET evaluation report" do
-    it 'creates a pdf report and downloads it' do
-      expect(controller).to receive(:send_data)
-      allow(controller).to receive(:render)
-      get :evaluation_report, id: @participant.access_key, format: :pdf
-       
-    end
-  end
-  
 end

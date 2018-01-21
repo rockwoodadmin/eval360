@@ -2,7 +2,6 @@ class Participant < ActiveRecord::Base
   include AccessKeys
   include ParticipantStatus
 
-
   acts_as :evaluator
   has_many :evaluations, -> { order "created_at ASC" }, dependent: :destroy
   has_many :evaluators, through: :evaluations
