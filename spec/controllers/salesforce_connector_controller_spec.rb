@@ -168,26 +168,25 @@ RSpec.describe SalesforceConnectorController, :type => :controller do
 
     end
 
-    context 'with vaild parameters, changing the questionnaire_name to "not applicable"' do
-      before(:each) do
-        @training= create(:training, sf_training_id: '123', questionnaire.name => "Standalone")
-        allow(Training).to receive(:find_by) { @training }
-        @training_params= JSON.generate({ sf_training_id: '123', questionnaire.name => "Not applicable", changed_fields: [ 'questionnaire.name' ] ,
-                                             api_key: ENV['INBOUND_SALESFORCE_KEY'] })
-        post :update_training, params: { :training => @training_params }
-      end 
+    #context 'with vaild parameters, changing the questionnaire_name to "not applicable"' do
+     # before(:each) do
+      ## allow(Training).to receive(:find_by) { @training }
+       # @training_params= JSON.generate({ sf_training_id: '123', questionnaire.name => "Not applicable", changed_fields: [ 'questionnaire.name' ] ,
+        #                                     api_key: ENV['INBOUND_SALESFORCE_KEY'] })
+       # post :update_training, params: { :training => @training_params }
+      #end 
 
       
-      it "updates the training" do
-        @training.reload
-        expect(@training.questionnaire.name).to eq "Not applicable" 
-      end 
+      #it "updates the training" do
+        #@training.reload
+        #expect(@training.questionnaire.name).to eq "Not applicable" 
+      #end 
 
-      it "returns status code 200" do
-        expect(response.status).to eq 200
-      end
+      #it "returns status code 200" do
+       # expect(response.status).to eq 200
+      #end
 
-    end
+    #end
 
    
 
