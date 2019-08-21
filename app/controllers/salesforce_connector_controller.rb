@@ -122,7 +122,7 @@ class SalesforceConnectorController < ApplicationController
     attributes = {}
     hash['changed_fields'].each do |cf|
       if cf == 'questionnaire_name'
-          if name: hash['questionnaire_name'] == 'Not applicable'
+          if attributes['questionnaire_name'] == 'Not applicable'
             attributes[cf] = hash[cf]
           end
           attributes['questionnaire_id'] = Questionnaire.find_by(name: hash['questionnaire_name']).id
