@@ -13,7 +13,7 @@ class SalesforceConnectorController < ApplicationController
     sf_training_id = hash['sf_training_id'] 
     training = Training.find_by(sf_training_id: sf_training_id) 
 
-    render json: 'invalid training record',
+    render json: 'invalid training record', 
       status: 422 and return if training.nil?
 
     attributes = hash.extract!('first_name', 'last_name', 'email',
