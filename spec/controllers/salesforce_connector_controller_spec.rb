@@ -15,6 +15,7 @@ RSpec.describe SalesforceConnectorController, :type => :controller do
                                              sf_training_id: '123', sf_registration_id: '345', sf_contact_id: '678',
                                              api_key: ENV['INBOUND_SALESFORCE_KEY'] })
       end 
+
       after do
         post :new_participant, params: { :participant => @participant_params }
       end
@@ -145,7 +146,7 @@ RSpec.describe SalesforceConnectorController, :type => :controller do
 
   describe "POST update_training" do
 
-    context 'with valid parameters' do
+    context 'with valid parameters, changing the city' do
 
       before(:each) do
         @training= create(:training, sf_training_id: '123', city: "Philadelphia")
@@ -166,6 +167,29 @@ RSpec.describe SalesforceConnectorController, :type => :controller do
       end
 
     end
+
+    context 'with vaild parameters, changing the questionnaire_name to "not applicable"' do
+      before(:each) do
+        @training= create(:training, sf_training_id: '123', questionnaire_name: "Standalone")
+        allow(Training).to receive(:find_by) { @training }
+        @training_params= JSON.generate({ sf_training_id: '123', city: "Not applicable", changed_fields: [ 'questionnaire_name' ] ,
+                                             api_key: ENV['INBOUND_SALESFORCE_KEY'] })
+        post :update_training, params: { :training => @training_params }
+      end 
+
+      
+      it "updates the training" do
+        @training.reload
+        expect(@training.questionnaire_name).to eq "Not applicable" 
+      end 
+
+      it "returns status code 200" do
+        expect(response.status).to eq 200
+      end
+
+    end
+
+   
 
     context 'with invalid parameters' do
 
