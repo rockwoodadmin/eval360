@@ -66,8 +66,10 @@ ActiveAdmin.register Participant do
     column "Peer Numeric Responses" do |participant|
       participant.peer_evaluations.map { |evaluation| 
         evaluation.answers.map { |answer| 
-          answer.numeric_response.select {|response| response != nil }
-        } 
+          answer.numeric_response 
+        }.select { |response| 
+          response != nil 
+        }
       }
     end
     column "Participant URL" do |participant|
